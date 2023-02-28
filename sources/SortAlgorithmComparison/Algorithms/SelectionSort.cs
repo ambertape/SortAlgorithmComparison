@@ -11,13 +11,13 @@ namespace SortAlgorithmComparison.Algorithms;
 /// Selection sort.
 /// </summary>
 [WavesPlugin(typeof(ISortingAlgorithm))]
-public class SelectionSort : ISortingAlgorithm
+public class SelectionSort : SortingAlgorithmBase
 {
     /// <inheritdoc />
-    public string Name => "Selection sort";
+    public override string Name => "Selection sort";
 
     /// <inheritdoc />
-    public void Sort(ref int[] array)
+    public override void Sort(ref int[] array)
     {
         Sorting(ref array, 0);
     }

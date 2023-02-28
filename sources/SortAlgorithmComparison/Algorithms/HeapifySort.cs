@@ -10,13 +10,13 @@ namespace SortAlgorithmComparison.Algorithms;
 /// Heapify sort.
 /// </summary>
 [WavesPlugin(typeof(ISortingAlgorithm))]
-public class HeapifySort : ISortingAlgorithm
+public class HeapifySort : SortingAlgorithmBase
 {
     /// <inheritdoc />
-    public string Name => "Heapify sort";
+    public override string Name => "Heapify sort";
 
     /// <inheritdoc />
-    public void Sort(ref int[] array)
+    public override void Sort(ref int[] array)
     {
         for (var i = array.Length / 2 - 1; i >= 0; i--)
         {

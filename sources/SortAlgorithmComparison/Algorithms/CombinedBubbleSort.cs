@@ -10,13 +10,13 @@ namespace SortAlgorithmComparison.Algorithms;
 /// Combined bubble sort.
 /// </summary>
 [WavesPlugin(typeof(ISortingAlgorithm))]
-public class CombinedBubbleSort : ISortingAlgorithm
+public class CombinedBubbleSort : SortingAlgorithmBase
 {
     /// <inheritdoc />
-    public string Name => "Combined bubble sort";
+    public override string Name => "Combined bubble sort";
 
     /// <inheritdoc />
-    public void Sort(ref int[] array)
+    public override void Sort(ref int[] array)
     {
         var length = array.Length;
 

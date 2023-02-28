@@ -11,13 +11,13 @@ namespace SortAlgorithmComparison.Algorithms;
 /// Tree sort.
 /// </summary>
 [WavesPlugin(typeof(ISortingAlgorithm))]
-public class TreeSort : ISortingAlgorithm
+public class TreeSort : SortingAlgorithmBase
 {
     /// <inheritdoc />
-    public string Name => "Tree sort";
+    public override string Name => "Tree sort";
 
     /// <inheritdoc />
-    public void Sort(ref int[] array)
+    public override void Sort(ref int[] array)
     {
         var treeNode = new TreeNode(array[0]);
         for (var i = 1; i < array.Length; i++)

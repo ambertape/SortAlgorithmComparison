@@ -10,13 +10,13 @@ namespace SortAlgorithmComparison.Algorithms;
 /// Insertion sort algorithm.
 /// </summary>
 [WavesPlugin(typeof(ISortingAlgorithm))]
-public class InsertionSort : ISortingAlgorithm
+public class InsertionSort : SortingAlgorithmBase
 {
     /// <inheritdoc />
-    public string Name => "Insertion sort";
+    public override string Name => "Insertion sort";
 
     /// <inheritdoc />
-    public void Sort(ref int[] array)
+    public override void Sort(ref int[] array)
     {
         var n = array.Length;
         for (var i = 1; i < n; ++i)

@@ -11,13 +11,13 @@ namespace SortAlgorithmComparison.Algorithms;
 /// Gnome sort.
 /// </summary>
 [WavesPlugin(typeof(ISortingAlgorithm))]
-public class GnomeSort : ISortingAlgorithm
+public class GnomeSort : SortingAlgorithmBase
 {
     /// <inheritdoc />
-    public string Name => "Gnome sort";
+    public override string Name => "Gnome sort";
 
     /// <inheritdoc />
-    public void Sort(ref int[] array)
+    public override void Sort(ref int[] array)
     {
         var index = 1;
         var nextIndex = index + 1;

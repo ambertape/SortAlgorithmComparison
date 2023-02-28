@@ -6,6 +6,11 @@ namespace SortAlgorithmComparison.Algorithms.Interfaces;
 public interface ISortingAlgorithm
 {
     /// <summary>
+    /// Updated event.
+    /// </summary>
+    event EventHandler<int[]> Updated;
+
+    /// <summary>
     /// Gets name.
     /// </summary>
     string Name { get; }

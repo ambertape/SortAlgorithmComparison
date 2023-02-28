@@ -10,13 +10,13 @@ namespace SortAlgorithmComparison.Algorithms;
 /// Cocktail sort.
 /// </summary>
 [WavesPlugin(typeof(ISortingAlgorithm))]
-public class CocktailSort : ISortingAlgorithm
+public class CocktailSort : SortingAlgorithmBase
 {
     /// <inheritdoc />
-    public string Name => "Cocktail sort";
+    public override string Name => "Cocktail sort";
 
     /// <inheritdoc />
-    public void Sort(ref int[] array)
+    public override void Sort(ref int[] array)
     {
         var start = 0;
         var end = array.Length - 1;

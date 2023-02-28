@@ -142,6 +142,11 @@ public class MainPageViewModel : WavesViewModelBase
     public ICommand TestAlgorithm { get; private set; }
 
     /// <summary>
+    /// Gets visualize algorithm command.
+    /// </summary>
+    public ICommand VisualizeAlgorithm { get; private set; }
+
+    /// <summary>
     /// Run single benchmark command.
     /// </summary>
     public ICommand RunSingleBenchmark { get; private set; }
@@ -170,6 +175,12 @@ public class MainPageViewModel : WavesViewModelBase
         RunSingleBenchmark = ReactiveCommand.CreateFromTask(OnRunSingleBenchmark);
         RunFullBenchmark = ReactiveCommand.CreateFromTask(OnRunFullBenchmark);
         TestAlgorithm = ReactiveCommand.CreateFromTask(OnTestAlgorithm);
+        VisualizeAlgorithm = ReactiveCommand.CreateFromTask(OnVisualizeAlgorithm);
+    }
+
+    private async Task OnVisualizeAlgorithm()
+    {
+        await _navigationService.NavigateAsync<VisualisationDialogViewModel, ISortingAlgorithm>(SelectedAlgorithm);
     }
 
     private async Task OnTestAlgorithm()

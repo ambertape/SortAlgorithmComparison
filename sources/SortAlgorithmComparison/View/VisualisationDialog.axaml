@@ -1,0 +1,54 @@
+<controls:WavesDialog xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="https://github.com/waves-framework/waves.ui.avalonia"
+             xmlns:viewModel="clr-namespace:SortAlgorithmComparison.ViewModel"
+             xmlns:converters="clr-namespace:Waves.UI.Avalonia.Charts.Converters;assembly=Waves.UI.Avalonia.Charts"
+             xmlns:controls1="clr-namespace:Waves.UI.Avalonia.Charts.Controls;assembly=Waves.UI.Avalonia.Charts"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             Width="640"
+             Height="480"
+             IsDoneButtonVisible="False"
+             x:Class="SortAlgorithmComparison.View.VisualisationDialog">
+
+    <controls:WavesDialog.Resources>
+        <converters:WavesColorToSolidColorBrushConverter x:Key="WavesColorToSolidColorBrushConverter"/>
+    </controls:WavesDialog.Resources>
+
+    <Design.DataContext>
+        <viewModel:VisualisationDialogViewModel/>
+    </Design.DataContext>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBlock Text="{Binding AlgorithmName}"
+                       Classes="H1"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+
+            <controls1:Waves2DSeriesChart Series="{Binding Series}"
+                                          XMin="{Binding XMin}"
+                                          XMax="{Binding XMax}"
+                                          YMin="{Binding YMin}"
+                                          YMax="{Binding YMax}"
+                                          Focusable="True"
+                                          BorderThickness="1"
+                                          VerticalSignatureAlignment="Right"
+                                          HorizontalSignatureAlignment="Bottom"/>
+
+        </Grid>
+
+    </Grid>
+
+</controls:WavesDialog>

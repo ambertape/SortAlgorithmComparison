@@ -11,13 +11,13 @@ namespace SortAlgorithmComparison.Algorithms;
 /// Quick sorting.
 /// </summary>
 [WavesPlugin(typeof(ISortingAlgorithm))]
-public class QuickSort : ISortingAlgorithm
+public class QuickSort : SortingAlgorithmBase
 {
     /// <inheritdoc />
-    public string Name => "Quick sort";
+    public override string Name => "Quick sort";
 
     /// <inheritdoc />
-    public void Sort(ref int[] array)
+    public override void Sort(ref int[] array)
     {
         Sort(array, 0, array.Length - 1);
     }

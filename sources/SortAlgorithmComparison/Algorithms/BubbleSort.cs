@@ -11,13 +11,13 @@ namespace SortAlgorithmComparison.Algorithms;
 /// Bubble sort implementation.
 /// </summary>
 [WavesPlugin(typeof(ISortingAlgorithm))]
-public class BubbleSort : ISortingAlgorithm
+public class BubbleSort : SortingAlgorithmBase
 {
     /// <inheritdoc />
-    public string Name => "Bubble sort";
+    public override string Name => "Bubble sort";
 
     /// <inheritdoc />
-    public void Sort(ref int[] array)
+    public override void Sort(ref int[] array)
     {
         var len = array.Length;
         for (var i = 1; i < len; i++)

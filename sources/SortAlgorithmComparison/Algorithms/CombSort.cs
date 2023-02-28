@@ -11,13 +11,13 @@ namespace SortAlgorithmComparison.Algorithms;
 /// Comb sort.
 /// </summary>
 [WavesPlugin(typeof(CombSort))]
-public class CombSort : ISortingAlgorithm
+public class CombSort : SortingAlgorithmBase
 {
     /// <inheritdoc />
-    public string Name => "Comb sort";
+    public override string Name => "Comb sort";
 
     /// <inheritdoc />
-    public void Sort(ref int[] array)
+    public override void Sort(ref int[] array)
     {
         var arrayLength = array.Length;
         var currentStep = arrayLength - 1;

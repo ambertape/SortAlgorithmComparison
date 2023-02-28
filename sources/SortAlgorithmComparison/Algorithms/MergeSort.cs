@@ -11,13 +11,13 @@ namespace SortAlgorithmComparison.Algorithms;
 /// Merge sort.
 /// </summary>
 [WavesPlugin(typeof(ISortingAlgorithm))]
-public class MergeSort : ISortingAlgorithm
+public class MergeSort : SortingAlgorithmBase
 {
     /// <inheritdoc />
-    public string Name => "Merge sort";
+    public override string Name => "Merge sort";
 
     /// <inheritdoc />
-    public void Sort(ref int[] array)
+    public override void Sort(ref int[] array)
     {
         array = Sort(array, 0, array.Length - 1);
     }

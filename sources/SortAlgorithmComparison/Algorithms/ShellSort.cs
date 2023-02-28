@@ -11,13 +11,13 @@ namespace SortAlgorithmComparison.Algorithms;
 /// Shell sort.
 /// </summary>
 [WavesPlugin(typeof(ISortingAlgorithm))]
-public class ShellSort : ISortingAlgorithm
+public class ShellSort : SortingAlgorithmBase
 {
     /// <inheritdoc />
-    public string Name => "Shell sort";
+    public override string Name => "Shell sort";
 
     /// <inheritdoc />
-    public void Sort(ref int[] array)
+    public override void Sort(ref int[] array)
     {
         var d = array.Length / 2;
         while (d >= 1)

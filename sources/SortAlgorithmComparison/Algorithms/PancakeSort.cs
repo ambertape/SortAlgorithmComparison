@@ -11,13 +11,13 @@ namespace SortAlgorithmComparison.Algorithms;
 /// Insertion sort algorithm.
 /// </summary>
 [WavesPlugin(typeof(ISortingAlgorithm))]
-public class PancakeSort : ISortingAlgorithm
+public class PancakeSort : SortingAlgorithmBase
 {
     /// <inheritdoc />
-    public string Name => "Pancake sort";
+    public override string Name => "Pancake sort";
 
     /// <inheritdoc />
-    public void Sort(ref int[] array)
+    public override void Sort(ref int[] array)
     {
         for (var subArrayLength = array.Length - 1; subArrayLength >= 0; subArrayLength--)
         {

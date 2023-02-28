@@ -11,13 +11,13 @@ namespace SortAlgorithmComparison.Algorithms;
 /// Shaker sort.
 /// </summary>
 [WavesPlugin(typeof(ISortingAlgorithm))]
-public class ShakerSort : ISortingAlgorithm
+public class ShakerSort : SortingAlgorithmBase
 {
     /// <inheritdoc />
-    public string Name => "Shaker sort";
+    public override string Name => "Shaker sort";
 
     /// <inheritdoc />
-    public void Sort(ref int[] array)
+    public override void Sort(ref int[] array)
     {
         for (var i = 0; i < array.Length / 2; i++)
         {
