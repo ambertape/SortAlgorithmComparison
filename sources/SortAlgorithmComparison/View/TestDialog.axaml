@@ -3,7 +3,71 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="https://github.com/waves-framework/waves.ui.avalonia"
+             xmlns:viewModel="clr-namespace:SortAlgorithmComparison.ViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             Width="640"
+             Height="480"
+             IsDoneButtonVisible="False"
              x:Class="SortAlgorithmComparison.View.TestDialog">
-    Welcome to Avalonia!
+
+    <Design.DataContext>
+        <viewModel:TestDialogViewModel/>
+    </Design.DataContext>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="12"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="9"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              Grid.ColumnSpan="3">
+            <TextBlock Text="{Binding AlgorithmName}"
+                       Classes="H1"/>
+        </Grid>
+
+        <Grid Grid.Row="2"
+              Grid.Column="0">
+
+            <TextBlock Text="Unsorted"
+                       Opacity="{DynamicResource Opacity-500}"
+                       Classes="Regular"/>
+
+        </Grid>
+
+        <Grid Grid.Row="2"
+              Grid.Column="2">
+
+            <TextBlock Text="Sorted"
+                       Opacity="{DynamicResource Opacity-500}"
+                       Classes="Regular"/>
+
+        </Grid>
+
+        <Grid Grid.Row="4"
+              Grid.Column="0">
+
+            <ListBox Items="{Binding UnsortedItems}"/>
+
+        </Grid>
+
+        <Grid Grid.Row="4"
+              Grid.Column="2">
+
+            <ListBox Items="{Binding SortedItems}"/>
+
+        </Grid>
+
+    </Grid>
+
 </controls:WavesDialog>
