@@ -1,3 +1,6 @@
+// Source: https://github.com/Mika-dot/Array-sorting
+// Article: https://habr.com/ru/post/689738/
+
 namespace SortAlgorithmComparison.Utils;
 
 /// <summary>

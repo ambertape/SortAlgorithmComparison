@@ -2,32 +2,38 @@
 // Article: https://habr.com/ru/post/689738/
 
 using SortAlgorithmComparison.Algorithms.Interfaces;
-using SortAlgorithmComparison.Utils;
 using Waves.Core.Base.Attributes;
 
 namespace SortAlgorithmComparison.Algorithms;
 
 /// <summary>
-/// Bubble sort implementation.
+/// Combined bubble sort.
 /// </summary>
 [WavesPlugin(typeof(ISortingAlgorithm))]
-public class BubbleSort : ISortingAlgorithm
+public class CombinedBubbleSort : ISortingAlgorithm
 {
     /// <inheritdoc />
-    public string Name => "Bubble sort";
+    public string Name => "Combined bubble sort";
 
     /// <inheritdoc />
     public void Sort(ref int[] array)
     {
-        var len = array.Length;
-        for (var i = 1; i < len; i++)
+        var length = array.Length;
+
+        var temp = array[0];
+
+        for (var i = 0; i < length; i++)
         {
-            for (var j = 0; j < len - i; j++)
+            for (var j = i + 1; j < length; j++)
             {
-                if (array[j] > array[j + 1])
+                if (array[i] <= array[j])
                 {
-                    SortUtils.Swap(ref array[j], ref array[j + 1]);
+                    continue;
                 }
+
+                temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
             }
         }
     }

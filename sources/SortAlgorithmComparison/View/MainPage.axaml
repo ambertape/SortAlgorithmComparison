@@ -28,7 +28,27 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
-            <controls1:Waves2DSeriesChart Series="{Binding Series}"
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="6"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+
+                <TextBlock Text="Chart of the time spent (ms) on sorting versus the number of elements (N) in the array"
+                           Classes="H3"
+                           HorizontalAlignment="Left"/>
+
+                <TextBlock Text="ms (N)"
+                           Classes="H3"
+                           HorizontalAlignment="Right"/>
+
+            </Grid>
+
+            <controls1:Waves2DSeriesChart Grid.Row="2"
+                                          Series="{Binding Series}"
                                           XMin="{Binding XMin}"
                                           XMax="{Binding XMax}"
                                           YMin="{Binding YMin}"

@@ -19,8 +19,8 @@ public class DataGeneratorService
     {
         _generator = new RandomizerNumber<int>(new FieldOptionsInteger()
         {
-            Min = -500,
-            Max = 500,
+            Min = Constants.GeneratorMinValue,
+            Max = Constants.GeneratorMaxValue,
             UseNullValues = false,
             ValueAsString = false,
         });

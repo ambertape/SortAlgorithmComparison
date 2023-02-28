@@ -8,6 +8,7 @@ using ReactiveUI.Fody.Helpers;
 using SortAlgorithmComparison.Algorithms.Interfaces;
 using SortAlgorithmComparison.Model;
 using SortAlgorithmComparison.Services;
+using SortAlgorithmComparison.Utils;
 using Waves.Core.Extensions;
 using Waves.UI.Avalonia.Charts.Controls;
 using Waves.UI.Base.Attributes;
@@ -256,12 +257,13 @@ public class MainPageViewModel : WavesViewModelBase
                     points[i] = new WavesPoint(x, y);
                 }
 
-                var series = new WavesPointSeries(points)
+                var series1 = new WavesPointSeries(points)
                 {
                     Color = color,
+                    Opacity = 1,
                 };
 
-                Series.Add(series);
+                Series.Add(series1);
                 CalculatedAlgorithms.Add(item);
             }
 
