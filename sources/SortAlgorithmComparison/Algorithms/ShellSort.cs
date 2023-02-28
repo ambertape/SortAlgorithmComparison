@@ -17,22 +17,35 @@ public class ShellSort : SortingAlgorithmBase
     public override string Name => "Shell sort";
 
     /// <inheritdoc />
-    public override void Sort(ref int[] array)
+    public override async Task<int[]> Sort(int[] array, CancellationToken token)
     {
         var d = array.Length / 2;
         while (d >= 1)
         {
+            if (token.IsCancellationRequested)
+            {
+                break;
+            }
+
             for (var i = d; i < array.Length; i++)
             {
+                if (token.IsCancellationRequested)
+                {
+                    break;
+                }
+
                 var j = i;
                 while ((j >= d) && (array[j - d] > array[j]))
                 {
                     SortUtils.Swap(ref array[j], ref array[j - d]);
                     j = j - d;
+                    await OnUpdated(array);
                 }
             }
 
             d /= 2;
         }
+
+        return array;
     }
 }

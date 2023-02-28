@@ -16,7 +16,7 @@ public class CombinedBubbleSort : SortingAlgorithmBase
     public override string Name => "Combined bubble sort";
 
     /// <inheritdoc />
-    public override void Sort(ref int[] array)
+    public override async Task<int[]> Sort(int[] array, CancellationToken token)
     {
         var length = array.Length;
 
@@ -24,6 +24,11 @@ public class CombinedBubbleSort : SortingAlgorithmBase
 
         for (var i = 0; i < length; i++)
         {
+            if (token.IsCancellationRequested)
+            {
+                break;
+            }
+
             for (var j = i + 1; j < length; j++)
             {
                 if (array[i] <= array[j])
@@ -34,7 +39,10 @@ public class CombinedBubbleSort : SortingAlgorithmBase
                 temp = array[i];
                 array[i] = array[j];
                 array[j] = temp;
+                await OnUpdated(array);
             }
         }
+
+        return array;
     }
 }

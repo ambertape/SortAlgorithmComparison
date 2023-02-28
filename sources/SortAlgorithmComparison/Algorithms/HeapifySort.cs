@@ -16,18 +16,32 @@ public class HeapifySort : SortingAlgorithmBase
     public override string Name => "Heapify sort";
 
     /// <inheritdoc />
-    public override void Sort(ref int[] array)
+    public override async Task<int[]> Sort(int[] array, CancellationToken token)
     {
         for (var i = array.Length / 2 - 1; i >= 0; i--)
         {
+            if (token.IsCancellationRequested)
+            {
+                break;
+            }
+
             Heapify(array, array.Length, i);
+            await OnUpdated(array);
         }
 
         for (var i = array.Length - 1; i >= 0; i--)
         {
+            if (token.IsCancellationRequested)
+            {
+                break;
+            }
+
             (array[0], array[i]) = (array[i], array[0]);
             Heapify(array, i, 0);
+            await OnUpdated(array);
         }
+
+        return array;
     }
 
     private static void Heapify(int[] arr, int heapSize, int heapRoot)

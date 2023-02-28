@@ -17,18 +17,33 @@ public class BubbleSort : SortingAlgorithmBase
     public override string Name => "Bubble sort";
 
     /// <inheritdoc />
-    public override void Sort(ref int[] array)
+    public override async Task<int[]> Sort(int[] array, CancellationToken token)
     {
         var len = array.Length;
         for (var i = 1; i < len; i++)
         {
+            if (token.IsCancellationRequested)
+            {
+                break;
+            }
+
             for (var j = 0; j < len - i; j++)
             {
-                if (array[j] > array[j + 1])
+                if (token.IsCancellationRequested)
                 {
-                    SortUtils.Swap(ref array[j], ref array[j + 1]);
+                    break;
                 }
+
+                if (array[j] <= array[j + 1])
+                {
+                    continue;
+                }
+
+                SortUtils.Swap(ref array[j], ref array[j + 1]);
+                await OnUpdated(array);
             }
         }
+
+        return array;
     }
 }

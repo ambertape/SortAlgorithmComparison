@@ -17,13 +17,18 @@ public class GnomeSort : SortingAlgorithmBase
     public override string Name => "Gnome sort";
 
     /// <inheritdoc />
-    public override void Sort(ref int[] array)
+    public override async Task<int[]> Sort(int[] array, CancellationToken token)
     {
         var index = 1;
         var nextIndex = index + 1;
 
         while (index < array.Length)
         {
+            if (token.IsCancellationRequested)
+            {
+                break;
+            }
+
             if (array[index - 1] < array[index])
             {
                 index = nextIndex;
@@ -40,7 +45,10 @@ public class GnomeSort : SortingAlgorithmBase
 
                 index = nextIndex;
                 nextIndex++;
+                await OnUpdated(array);
             }
         }
+
+        return array;
     }
 }

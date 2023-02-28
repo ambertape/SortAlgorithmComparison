@@ -322,7 +322,7 @@ public class MainPageViewModel : WavesViewModelBase
                 {
                     stopWatch.Reset();
                     stopWatch.Start();
-                    algorithm.Sort(ref array);
+                    await algorithm.Sort(array, new CancellationToken());
                     stopWatch.Stop();
                     meanElapsed += stopWatch.ElapsedMilliseconds;
                     progressCount++;

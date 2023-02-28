@@ -17,14 +17,21 @@ public class TreeSort : SortingAlgorithmBase
     public override string Name => "Tree sort";
 
     /// <inheritdoc />
-    public override void Sort(ref int[] array)
+    public override async Task<int[]> Sort(int[] array, CancellationToken token)
     {
         var treeNode = new TreeNode(array[0]);
         for (var i = 1; i < array.Length; i++)
         {
+            if (token.IsCancellationRequested)
+            {
+                break;
+            }
+
             treeNode.Insert(new TreeNode(array[i]));
+            await OnUpdated(array);
         }
 
         array = treeNode.Transform();
+        return array;
     }
 }

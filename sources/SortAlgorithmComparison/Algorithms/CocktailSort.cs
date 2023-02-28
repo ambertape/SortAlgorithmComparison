@@ -16,7 +16,7 @@ public class CocktailSort : SortingAlgorithmBase
     public override string Name => "Cocktail sort";
 
     /// <inheritdoc />
-    public override void Sort(ref int[] array)
+    public override async Task<int[]> Sort(int[] array, CancellationToken token)
     {
         var start = 0;
         var end = array.Length - 1;
@@ -24,6 +24,11 @@ public class CocktailSort : SortingAlgorithmBase
 
         while (swapped)
         {
+            if (token.IsCancellationRequested)
+            {
+                break;
+            }
+
             swapped = false;
 
             int temp;
@@ -35,6 +40,7 @@ public class CocktailSort : SortingAlgorithmBase
                     array[i] = array[i + 1];
                     array[i + 1] = temp;
                     swapped = true;
+                    await OnUpdated(array);
                 }
             }
 
@@ -57,9 +63,12 @@ public class CocktailSort : SortingAlgorithmBase
                 array[i] = array[i + 1];
                 array[i + 1] = temp;
                 swapped = true;
+                await OnUpdated(array);
             }
 
             start += 1;
         }
+
+        return array;
     }
 }

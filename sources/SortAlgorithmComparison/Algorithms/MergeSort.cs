@@ -17,22 +17,29 @@ public class MergeSort : SortingAlgorithmBase
     public override string Name => "Merge sort";
 
     /// <inheritdoc />
-    public override void Sort(ref int[] array)
+    public override async Task<int[]> Sort(int[] array, CancellationToken token)
     {
-        array = Sort(array, 0, array.Length - 1);
+        array = await Sort(array, 0, array.Length - 1, token);
+        return array;
     }
 
-    private static int[] Sort(int[] array, int start, int end)
+    private async Task<int[]> Sort(int[] array, int start, int end, CancellationToken token)
     {
+        if (token.IsCancellationRequested)
+        {
+            return array;
+        }
+
         if (start >= end)
         {
             return new[] { array[start] };
         }
 
         var middle = (end + start) / 2;
-        var leftArr = Sort(array, start, middle);
-        var rightArr = Sort(array, middle + 1, end);
+        var leftArr = await Sort(array, start, middle, token);
+        var rightArr = await Sort(array, middle + 1, end, token);
         var mergedArr = SortUtils.MergeArray(leftArr, rightArr);
+        await OnUpdated(array);
         return mergedArr;
     }
 }

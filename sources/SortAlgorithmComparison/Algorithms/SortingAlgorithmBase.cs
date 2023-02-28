@@ -14,14 +14,19 @@ public abstract class SortingAlgorithmBase : ISortingAlgorithm
     public abstract string Name { get; }
 
     /// <inheritdoc />
-    public abstract void Sort(ref int[] array);
+    public abstract Task<int[]> Sort(int[] array, CancellationToken token);
 
     /// <summary>
     /// Updated callback.
     /// </summary>
     /// <param name="e">Updated array.</param>
-    protected virtual void OnUpdated(int[] e)
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    protected async Task OnUpdated(int[] e)
     {
-        Updated?.Invoke(this, e);
+        if (Updated != null)
+        {
+            Updated?.Invoke(this, e);
+            await Task.Delay(25);  // for visualisation
+        }
     }
 }

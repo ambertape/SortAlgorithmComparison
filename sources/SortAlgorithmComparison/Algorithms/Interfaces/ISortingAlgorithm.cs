@@ -19,5 +19,7 @@ public interface ISortingAlgorithm
     /// Sorts array.
     /// </summary>
     /// <param name="array">Array.</param>
-    void Sort(ref int[] array);
+    /// <param name="token">Cancellation token.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    Task<int[]> Sort(int[] array, CancellationToken token);
 }

@@ -17,18 +17,24 @@ public class CombSort : SortingAlgorithmBase
     public override string Name => "Comb sort";
 
     /// <inheritdoc />
-    public override void Sort(ref int[] array)
+    public override async Task<int[]> Sort(int[] array, CancellationToken token)
     {
         var arrayLength = array.Length;
         var currentStep = arrayLength - 1;
 
         while (currentStep > 1)
         {
+            if (token.IsCancellationRequested)
+            {
+                break;
+            }
+
             for (var i = 0; i + currentStep < array.Length; i++)
             {
                 if (array[i] > array[i + currentStep])
                 {
                     SortUtils.Swap(ref array[i], ref array[i + currentStep]);
+                    await OnUpdated(array);
                 }
             }
 
@@ -37,12 +43,18 @@ public class CombSort : SortingAlgorithmBase
 
         for (var i = 1; i < arrayLength; i++)
         {
+            if (token.IsCancellationRequested)
+            {
+                break;
+            }
+
             var swapFlag = false;
             for (var j = 0; j < arrayLength - i; j++)
             {
                 if (array[j] > array[j + 1])
                 {
                     SortUtils.Swap(ref array[j], ref array[j + 1]);
+                    await OnUpdated(array);
                     swapFlag = true;
                 }
             }
@@ -52,6 +64,8 @@ public class CombSort : SortingAlgorithmBase
                 break;
             }
         }
+
+        return array;
     }
 
     private static int GetNextStep(int s)

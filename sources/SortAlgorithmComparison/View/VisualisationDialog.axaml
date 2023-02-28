@@ -49,6 +49,23 @@
 
         </Grid>
 
+        <Grid Grid.Row="4">
+
+            <StackPanel>
+
+                <controls:WavesButton Content="Visualize algorithm"
+                                      HorizontalAlignment="Stretch"
+                                      Command="{Binding RunVisualisation}"/>
+
+                <controls:WavesButton Content="Stop visualize algorithm"
+                                      HorizontalAlignment="Stretch"
+                                      Command="{Binding StopVisualisation}"/>
+
+            </StackPanel>
+
+
+        </Grid>
+
     </Grid>
 
 </controls:WavesDialog>

@@ -8,6 +8,7 @@ using SortAlgorithmComparison.Algorithms.Interfaces;
 using SortAlgorithmComparison.Model;
 using SortAlgorithmComparison.Services;
 using SortAlgorithmComparison.Utils;
+using Waves.Core.Extensions;
 using Waves.UI.Base.Attributes;
 using Waves.UI.Charts.Drawing.Primitives;
 using Waves.UI.Charts.Drawing.Primitives.Data;
@@ -28,6 +29,10 @@ public class VisualisationDialogViewModel : WavesDialogViewModelBase<ISortingAlg
     private const int N = 200;
     private readonly DataGeneratorService _dataGeneratorService;
     private ISortingAlgorithm _algorithm;
+    private int[] _unsortedArray;
+    private int[] _sortedArray;
+
+    private CancellationTokenSource _source;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TestDialogViewModel"/> class.
@@ -45,7 +50,7 @@ public class VisualisationDialogViewModel : WavesDialogViewModelBase<ISortingAlg
 
         XMin = 0d;
         YMin = 10d;
-        XMax = 200.1d;
+        XMax = Convert.ToDouble(N);
         YMax = 10d;
     }
 
@@ -90,28 +95,34 @@ public class VisualisationDialogViewModel : WavesDialogViewModelBase<ISortingAlg
     /// </summary>
     public ICommand RunVisualisation { get; private set; }
 
+    /// <summary>
+    /// Stop single benchmark command.
+    /// </summary>
+    public ICommand StopVisualisation { get; private set; }
+
     /// <inheritdoc />
     public override async Task Prepare(ISortingAlgorithm t)
     {
         _algorithm = t;
         AlgorithmName = _algorithm.Name;
         RunVisualisation = ReactiveCommand.CreateFromTask(OnRunVisualisation);
+        StopVisualisation = ReactiveCommand.CreateFromTask(OnStopVisualisation);
 
-        var unsortedArray = await _dataGeneratorService.Generate(N);
-        var sortedArray = new int[N];
-        unsortedArray.CopyTo(sortedArray, 0);
+        _unsortedArray = await _dataGeneratorService.Generate(N);
+        _sortedArray = new int[N];
+        _unsortedArray.CopyTo(_sortedArray, 0);
 
         await Dispatcher.UIThread.InvokeAsync(() =>
         {
-            var min = unsortedArray.Min();
-            var max = unsortedArray.Max();
+            var min = _unsortedArray.Min();
+            var max = _unsortedArray.Max();
             var delta = (max - min) / 10.0d; // view optimization
 
             var points = new WavesPoint[N];
             var color = WavesColor.Random();
             for (var i = 0; i < N; i++)
             {
-                points[i] = new WavesPoint(i,  unsortedArray[i]);
+                points[i] = new WavesPoint(i,  _unsortedArray[i]);
             }
 
             Series = new ObservableCollection<IWaves2DSeries>
@@ -127,10 +138,21 @@ public class VisualisationDialogViewModel : WavesDialogViewModelBase<ISortingAlg
         });
     }
 
-    private void UpdateChart(int[] array)
+    /// <inheritdoc />
+    protected override void OnDialogCancel()
+    {
+        if (_source is { IsCancellationRequested: false })
+        {
+            _source.Cancel();
+            _source?.Dispose();
+        }
+
+        base.OnDialogCancel();
+    }
+
+    private async Task UpdateChart(int[] array)
     {
         var points = new WavesPoint[N];
-        var color = WavesColor.Random();
         for (var i = 0; i < N; i++)
         {
             points[i] = new WavesPoint(i, array[i]);
@@ -139,8 +161,23 @@ public class VisualisationDialogViewModel : WavesDialogViewModelBase<ISortingAlg
         (Series[0] as WavesPointSeries)?.Update(points);
     }
 
-    private Task OnRunVisualisation()
+    private async Task OnRunVisualisation()
     {
-        throw new NotImplementedException();
+        _source = new CancellationTokenSource();
+
+        _algorithm.Updated += AlgorithmOnUpdated;
+        await _algorithm.Sort(_sortedArray, _source.Token);
+        _algorithm.Updated -= AlgorithmOnUpdated;
+    }
+
+    private async Task OnStopVisualisation()
+    {
+        _source.Cancel();
+        _source?.Dispose();
+    }
+
+    private async void AlgorithmOnUpdated(object? sender, int[] e)
+    {
+        await UpdateChart(e);
     }
 }

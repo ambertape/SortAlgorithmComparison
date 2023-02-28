@@ -17,15 +17,22 @@ public class SelectionSort : SortingAlgorithmBase
     public override string Name => "Selection sort";
 
     /// <inheritdoc />
-    public override void Sort(ref int[] array)
+    public override async Task<int[]> Sort(int[] array, CancellationToken token)
     {
-        Sorting(ref array, 0);
+        Sorting(ref array, 0, token);
+        await OnUpdated(array);
+        return array;
     }
 
-    private static void Sorting(ref int[] array, int currentIndex = 0)
+    private static void Sorting(ref int[] array, int currentIndex = 0, CancellationToken token = default)
     {
         while (true)
         {
+            if (token.IsCancellationRequested)
+            {
+                break;
+            }
+
             if (currentIndex < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(currentIndex));

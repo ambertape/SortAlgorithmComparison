@@ -16,11 +16,16 @@ public class InsertionSort : SortingAlgorithmBase
     public override string Name => "Insertion sort";
 
     /// <inheritdoc />
-    public override void Sort(ref int[] array)
+    public override async Task<int[]> Sort(int[] array, CancellationToken token)
     {
         var n = array.Length;
         for (var i = 1; i < n; ++i)
         {
+            if (token.IsCancellationRequested)
+            {
+                break;
+            }
+
             var key = array[i];
             var j = i - 1;
 
@@ -32,9 +37,12 @@ public class InsertionSort : SortingAlgorithmBase
             {
                 array[j + 1] = array[j];
                 j = j - 1;
+                await OnUpdated(array);
             }
 
             array[j + 1] = key;
         }
+
+        return array;
     }
 }

@@ -17,13 +17,18 @@ public class ShakerSort : SortingAlgorithmBase
     public override string Name => "Shaker sort";
 
     /// <inheritdoc />
-    public override void Sort(ref int[] array)
+    public override async Task<int[]> Sort(int[] array, CancellationToken token)
     {
         for (var i = 0; i < array.Length / 2; i++)
         {
             var swapFlag = false;
             for (var j = i; j < array.Length - i - 1; j++)
             {
+                if (token.IsCancellationRequested)
+                {
+                    break;
+                }
+
                 if (array[j] <= array[j + 1])
                 {
                     continue;
@@ -31,10 +36,16 @@ public class ShakerSort : SortingAlgorithmBase
 
                 SortUtils.Swap(ref array[j], ref array[j + 1]);
                 swapFlag = true;
+                await OnUpdated(array);
             }
 
             for (var j = array.Length - 2 - i; j > i; j--)
             {
+                if (token.IsCancellationRequested)
+                {
+                    break;
+                }
+
                 if (array[j - 1] <= array[j])
                 {
                     continue;
@@ -42,6 +53,7 @@ public class ShakerSort : SortingAlgorithmBase
 
                 SortUtils.Swap(ref array[j - 1], ref array[j]);
                 swapFlag = true;
+                await OnUpdated(array);
             }
 
             if (!swapFlag)
@@ -49,5 +61,7 @@ public class ShakerSort : SortingAlgorithmBase
                 break;
             }
         }
+
+        return array;
     }
 }

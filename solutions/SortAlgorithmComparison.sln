@@ -17,6 +17,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{C4C4B855-054E-46EF-BE09-428D64796DBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Waves.UI.Avalonia.Charts", "..\submodules\ui.charts\sources\Waves.UI.Avalonia.Charts\Waves.UI.Avalonia.Charts.csproj", "{6DF7FA94-71C4-476C-86D2-18C2BA5BF570}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Waves.UI.Charts", "..\submodules\ui.charts\sources\Waves.UI.Charts\Waves.UI.Charts.csproj", "{02EC2914-3AD4-4FB2-849F-30D52DE5FA8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Waves.UI.Avalonia", "..\submodules\ui.charts\submodules\ui.avalonia\sources\Waves.UI.Avalonia\Waves.UI.Avalonia.csproj", "{8B0DC897-2D26-4B4A-B6F4-1A3CCD3C93C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Waves.UI", "..\submodules\ui.charts\submodules\ui.avalonia\submodules\ui\sources\Waves.UI\Waves.UI.csproj", "{5BE3405F-EA39-4E42-9FB8-43A03AF98BF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Waves.Core", "..\submodules\ui.charts\submodules\ui.avalonia\submodules\ui\submodules\core\sources\Waves.Core\Waves.Core.csproj", "{7E043A72-381D-4C4E-993B-08FC7E14C4E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,8 +43,33 @@ Global
 		{0E7DDD4C-9A80-43D8-B565-33ED21A4047C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E7DDD4C-9A80-43D8-B565-33ED21A4047C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E7DDD4C-9A80-43D8-B565-33ED21A4047C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DF7FA94-71C4-476C-86D2-18C2BA5BF570}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DF7FA94-71C4-476C-86D2-18C2BA5BF570}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DF7FA94-71C4-476C-86D2-18C2BA5BF570}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DF7FA94-71C4-476C-86D2-18C2BA5BF570}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02EC2914-3AD4-4FB2-849F-30D52DE5FA8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02EC2914-3AD4-4FB2-849F-30D52DE5FA8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02EC2914-3AD4-4FB2-849F-30D52DE5FA8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02EC2914-3AD4-4FB2-849F-30D52DE5FA8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B0DC897-2D26-4B4A-B6F4-1A3CCD3C93C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B0DC897-2D26-4B4A-B6F4-1A3CCD3C93C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B0DC897-2D26-4B4A-B6F4-1A3CCD3C93C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B0DC897-2D26-4B4A-B6F4-1A3CCD3C93C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BE3405F-EA39-4E42-9FB8-43A03AF98BF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BE3405F-EA39-4E42-9FB8-43A03AF98BF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BE3405F-EA39-4E42-9FB8-43A03AF98BF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BE3405F-EA39-4E42-9FB8-43A03AF98BF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E043A72-381D-4C4E-993B-08FC7E14C4E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E043A72-381D-4C4E-993B-08FC7E14C4E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E043A72-381D-4C4E-993B-08FC7E14C4E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E043A72-381D-4C4E-993B-08FC7E14C4E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{65D6A7F0-09BE-4FB0-9991-5A133E1EDDDD} = {61A7E4A7-1C1A-443B-AE6A-9BD52842C9FA}
+		{6DF7FA94-71C4-476C-86D2-18C2BA5BF570} = {C4C4B855-054E-46EF-BE09-428D64796DBD}
+		{02EC2914-3AD4-4FB2-849F-30D52DE5FA8B} = {C4C4B855-054E-46EF-BE09-428D64796DBD}
+		{8B0DC897-2D26-4B4A-B6F4-1A3CCD3C93C5} = {C4C4B855-054E-46EF-BE09-428D64796DBD}
+		{5BE3405F-EA39-4E42-9FB8-43A03AF98BF9} = {C4C4B855-054E-46EF-BE09-428D64796DBD}
+		{7E043A72-381D-4C4E-993B-08FC7E14C4E6} = {C4C4B855-054E-46EF-BE09-428D64796DBD}
 	EndGlobalSection
 EndGlobal

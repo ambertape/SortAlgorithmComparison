@@ -74,7 +74,7 @@ public class TestDialogViewModel : WavesDialogViewModelBase<ISortingAlgorithm, b
         var sortedArray = new int[n];
         var delta = Constants.GeneratorMaxValue - Constants.GeneratorMinValue;
         unsortedArray.CopyTo(sortedArray, 0);
-        _algorithm.Sort(ref sortedArray);
+        sortedArray = await _algorithm.Sort(sortedArray, new CancellationToken());
         IsOrdered = sortedArray.IsOrdered();
 
         var step = 255.0d / delta;

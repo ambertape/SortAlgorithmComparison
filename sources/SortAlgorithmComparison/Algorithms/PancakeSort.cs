@@ -17,10 +17,15 @@ public class PancakeSort : SortingAlgorithmBase
     public override string Name => "Pancake sort";
 
     /// <inheritdoc />
-    public override void Sort(ref int[] array)
+    public override async Task<int[]> Sort(int[] array, CancellationToken token)
     {
         for (var subArrayLength = array.Length - 1; subArrayLength >= 0; subArrayLength--)
         {
+            if (token.IsCancellationRequested)
+            {
+                break;
+            }
+
             var indexOfMax = SortUtils.IndexOfMax(array, subArrayLength);
             if (indexOfMax == subArrayLength)
             {
@@ -29,6 +34,9 @@ public class PancakeSort : SortingAlgorithmBase
 
             SortUtils.Flip(array, indexOfMax);
             SortUtils.Flip(array, subArrayLength);
+            await OnUpdated(array);
         }
+
+        return array;
     }
 }

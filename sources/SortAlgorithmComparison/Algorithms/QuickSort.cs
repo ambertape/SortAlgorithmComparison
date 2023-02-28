@@ -17,22 +17,29 @@ public class QuickSort : SortingAlgorithmBase
     public override string Name => "Quick sort";
 
     /// <inheritdoc />
-    public override void Sort(ref int[] array)
+    public override async Task<int[]> Sort(int[] array, CancellationToken token)
     {
-        Sort(array, 0, array.Length - 1);
+        Sort(array, 0, array.Length - 1, token);
+        return array;
     }
 
-    private static int[] Sort(int[] array, int minIndex, int maxIndex)
+    private async Task<int[]> Sort(int[] array, int minIndex, int maxIndex, CancellationToken token)
     {
+        if (token.IsCancellationRequested)
+        {
+            return array;
+        }
+
         if (minIndex >= maxIndex)
         {
             return array;
         }
 
         var pivotIndex = SortUtils.Partition(array, minIndex, maxIndex);
-        Sort(array, minIndex, pivotIndex - 1);
-        Sort(array, pivotIndex + 1, maxIndex);
+        await Sort(array, minIndex, pivotIndex - 1, token);
+        await Sort(array, pivotIndex + 1, maxIndex, token);
 
+        await OnUpdated(array);
         return array;
     }
 }
