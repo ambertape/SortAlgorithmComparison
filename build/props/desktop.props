@@ -1,47 +1,16 @@
 <Project>
 
-  <PropertyGroup>
-    <TargetFrameworks>net7.0;</TargetFrameworks>
-    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
-    <Configurations>Debug;Release</Configurations>
-    <Platforms>AnyCPU;x86;x64</Platforms>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <LangVersion>latest</LangVersion>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageReadmeFile>readme.md</PackageReadmeFile>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <AvaloniaVersion>11.0.0-preview4</AvaloniaVersion>
-    <FluentAvaloniaVersion>2.0.0-preview4</FluentAvaloniaVersion>
-  </PropertyGroup>
+  <Import Project="common.props" />
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\..\bin\client\anyCPU\debug\</OutputPath>
+    <OutputPath>..\..\bin\desktop\anyCPU\debug\</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>..\..\bin\client\anyCPU\release\</OutputPath>
+    <OutputPath>..\..\bin\desktop\anyCPU\release\</OutputPath>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="..\..\readme.md">
-      <Pack>True</Pack>
-      <PackagePath/>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
-  <Import Project="..\..\submodules\stylecop\stylecop.targets" />
 
 </Project>

@@ -1,9 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+    <Import Project="../../build/props/common.props" />
+
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
+
+    <ItemGroup>
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+        <PackageReference Include="RandomDataGenerator.Net" Version="1.0.17" />
+        <PackageReference Include="ReactiveUI" Version="18.4.1" />
+        <PackageReference Include="ReactiveUI.Fody" Version="18.4.1" />
+        <PackageReference Include="RestSharp" Version="108.0.3" />
+        <PackageReference Include="Waves.UI.Avalonia.Charts" Version="2022.3.3-prerelease.6" />
+    </ItemGroup>
 
 </Project>

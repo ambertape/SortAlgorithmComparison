@@ -1,0 +1,21 @@
+<controls:WavesWindow xmlns="https://github.com/avaloniaui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:controls="clr-namespace:Waves.UI.Avalonia.Controls;assembly=Waves.UI.Avalonia"
+                      mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+                      x:Class="SortAlgorithmComparison.View.MainWindow"
+                      TransparencyLevelHint="None"
+                      ExtendClientAreaToDecorationsHint="True"
+                      Width="1280"
+                      Height="800"
+                      Title="Sorting Algorithms"
+                      FontFamily="{DynamicResource RobotoRegular}"
+                      FontSize="14">
+    <controls:WavesWindow.Background>
+        <LinearGradientBrush Opacity="{DynamicResource Opacity-800}">
+            <GradientStop Offset="0" Color="{DynamicResource Color-100}" />
+            <GradientStop Offset="1" Color="{DynamicResource Color-300}" />
+        </LinearGradientBrush>
+    </controls:WavesWindow.Background>
+</controls:WavesWindow>

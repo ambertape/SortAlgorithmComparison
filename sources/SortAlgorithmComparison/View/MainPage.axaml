@@ -1,0 +1,181 @@
+<controls:WavesPage xmlns="https://github.com/avaloniaui"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:controls="clr-namespace:Waves.UI.Avalonia.Controls;assembly=Waves.UI.Avalonia"
+                      xmlns:viewModel="clr-namespace:SortAlgorithmComparison.ViewModel"
+                      xmlns:controls1="clr-namespace:Waves.UI.Avalonia.Charts.Controls;assembly=Waves.UI.Avalonia.Charts"
+                      xmlns:converters="clr-namespace:Waves.UI.Avalonia.Charts.Converters;assembly=Waves.UI.Avalonia.Charts"
+                      mc:Ignorable="d" 
+                      d:DesignWidth="800"
+                      d:DesignHeight="450"
+                      x:Class="SortAlgorithmComparison.View.MainPage">
+
+    <controls:WavesPage.Resources>
+        <converters:WavesColorToSolidColorBrushConverter x:Key="WavesColorToSolidColorBrushConverter"/>
+    </controls:WavesPage.Resources>
+
+    <Design.DataContext>
+        <viewModel:MainPageViewModel/>
+    </Design.DataContext>
+    
+    <Grid Margin="{DynamicResource BigThickness}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="24"/>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <controls1:Waves2DSeriesChart Series="{Binding Series}"
+                                          XMin="{Binding XMin}"
+                                          XMax="{Binding XMax}"
+                                          YMin="{Binding YMin}"
+                                          YMax="{Binding YMax}"
+                                          Focusable="True"
+                                          XAxisPrimaryTicksNumber="4"
+                                          YAxisPrimaryTicksNumber="4"
+                                          XAxisAdditionalTicksNumber="4"
+                                          YAxisAdditionalTicksNumber="4"
+                                          BorderThickness="1"
+                                          VerticalSignatureAlignment="Right"
+                                          HorizontalSignatureAlignment="Bottom"/>
+        </Grid>
+
+        <Grid Grid.Column="2">
+
+            <Grid IsVisible="{Binding LoadingState.IsLoading}">
+
+                <StackPanel VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch">
+
+                    <TextBlock Classes="Regular"
+                               TextWrapping="WrapWithOverflow"
+                               Text="{Binding ProgressText}"
+                               Margin="0,0,0,6"/>
+
+                    <ProgressBar Value="{Binding LoadingState.ProgressValue}"
+                                 IsIndeterminate="{Binding LoadingState.IsIndeterminate}"/>
+
+                    <ItemsControl Items="{Binding CalculatedAlgorithms}"
+                                  Margin="0,18,0,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="Auto,6,*,6,Auto"
+                                      Margin="0,0,0,6">
+                                    <Ellipse Fill="{Binding Color, Converter={StaticResource WavesColorToSolidColorBrushConverter}}"
+                                             Grid.Column="0"
+                                             Height="6"
+                                             Width="6"/>
+                                    <TextBlock Text="{Binding Name}"
+                                               Grid.Column="2"/>
+                                    <TextBlock Text="{Binding TotalTime, StringFormat={}{0} sec.}"
+                                               Opacity="{DynamicResource Opacity-500}"
+                                               Grid.Column="4"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                </StackPanel>
+
+            </Grid>
+
+            <ScrollViewer Margin="0,0,-24,0"
+                          IsVisible="{Binding !LoadingState.IsLoading}">
+
+                <StackPanel Margin="0,0,24,0">
+
+                    <TextBlock Text="Algorithms"
+                               Classes="H2"
+                               Margin="0,0,0,12"/>
+
+                    <TextBlock Text="Choose an algorithm for a single benchmark or run a benchmark for all at once"
+                               TextWrapping="WrapWithOverflow"
+                               Classes="Regular"
+                               Margin="0,0,0,9"/>
+
+                    <ComboBox Items="{Binding AvailableAlgorithms}"
+                              SelectedItem="{Binding SelectedAlgorithm}"
+                              HorizontalAlignment="Stretch"
+                              Margin="0,0,0,9">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <controls:WavesButton Content="Test algorithm"
+                                          HorizontalAlignment="Stretch"
+                                          Command="{Binding TestAlgorithm}"
+                                          Margin="0,0,0,6"/>
+
+                    <controls:WavesButton Content="Run single benchmark"
+                                          HorizontalAlignment="Stretch"
+                                          Command="{Binding RunSingleBenchmark}"
+                                          Margin="0,0,0,18"/>
+
+                    <TextBlock Text="Benchmark settings"
+                               Classes="H2"
+                               Margin="0,0,0,12"/>
+
+                    <TextBlock Text="Number or runs"
+                               TextWrapping="WrapWithOverflow"
+                               Classes="Regular"
+                               Margin="0,0,0,6"/>
+
+                    <controls:WavesTextBox Text="{Binding NumberOrRuns}"
+                                           Margin="0,0,0,9"/>
+
+                    <TextBlock Text="Minimum values"
+                               TextWrapping="WrapWithOverflow"
+                               Classes="Regular"
+                               Margin="0,0,0,6"/>
+
+                    <controls:WavesTextBox Text="{Binding Minimum}"
+                                           Margin="0,0,0,9"/>
+
+                    <TextBlock Text="Maximum values"
+                               TextWrapping="WrapWithOverflow"
+                               Classes="Regular"
+                               Margin="0,0,0,6"/>
+
+                    <controls:WavesTextBox Text="{Binding Maximum}"
+                                           Margin="0,0,0,18"/>
+
+                    <controls:WavesButton Content="Run full benchmark"
+                                          HorizontalAlignment="Stretch"
+                                          IsAccent="True"
+                                          Command="{Binding RunFullBenchmark}"
+                                          Margin="0,0,0,18"/>
+
+                    <ItemsControl Items="{Binding CalculatedAlgorithms}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="Auto,6,*,6,Auto"
+                                      Margin="0,0,0,6">
+                                    <Ellipse Fill="{Binding Color, Converter={StaticResource WavesColorToSolidColorBrushConverter}}"
+                                             Grid.Column="0"
+                                             Height="6"
+                                             Width="6"/>
+                                    <TextBlock Text="{Binding Name}"
+                                               Grid.Column="2"/>
+                                    <TextBlock Text="{Binding TotalTime, StringFormat={}{0} sec.}"
+                                               Opacity="{DynamicResource Opacity-500}"
+                                               Grid.Column="4"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                </StackPanel>
+
+            </ScrollViewer>
+
+        </Grid>
+
+    </Grid>
+    
+</controls:WavesPage>
