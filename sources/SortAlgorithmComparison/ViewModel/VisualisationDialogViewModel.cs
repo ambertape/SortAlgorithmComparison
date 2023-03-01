@@ -13,6 +13,7 @@ using Waves.UI.Base.Attributes;
 using Waves.UI.Charts.Drawing.Primitives;
 using Waves.UI.Charts.Drawing.Primitives.Data;
 using Waves.UI.Charts.Series;
+using Waves.UI.Charts.Series.Enums;
 using Waves.UI.Charts.Series.Interfaces;
 using Waves.UI.Dialogs;
 using Waves.UI.Presentation;
@@ -130,6 +131,10 @@ public class VisualisationDialogViewModel : WavesDialogViewModelBase<ISortingAlg
                 new WavesPointSeries(points)
                 {
                     Color = color,
+                    Opacity = 0.75,
+                    Thickness = 1.5,
+                    DotType = WavesDotType.Circle,
+                    DotColor = color,
                 },
             };
 

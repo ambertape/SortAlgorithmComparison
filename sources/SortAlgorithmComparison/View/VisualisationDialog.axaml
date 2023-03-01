@@ -7,8 +7,8 @@
              xmlns:converters="clr-namespace:Waves.UI.Avalonia.Charts.Converters;assembly=Waves.UI.Avalonia.Charts"
              xmlns:controls1="clr-namespace:Waves.UI.Avalonia.Charts.Controls;assembly=Waves.UI.Avalonia.Charts"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             Width="640"
-             Height="480"
+             Width="800"
+             Height="600"
              IsDoneButtonVisible="False"
              x:Class="SortAlgorithmComparison.View.VisualisationDialog">
 
