@@ -9,6 +9,7 @@ using SortAlgorithmComparison.Algorithms.Interfaces;
 using SortAlgorithmComparison.Model;
 using SortAlgorithmComparison.Services;
 using SortAlgorithmComparison.Utils;
+using SortAlgorithmComparison.ViewModel.Controls;
 using Waves.Core.Extensions;
 using Waves.UI.Avalonia.Charts.Controls;
 using Waves.UI.Base.Attributes;
@@ -180,7 +181,7 @@ public class MainPageViewModel : WavesViewModelBase
 
     private async Task OnVisualizeAlgorithm()
     {
-        await _navigationService.NavigateAsync<VisualisationDialogViewModel, ISortingAlgorithm>(SelectedAlgorithm);
+        await _navigationService.NavigateAsync<VisualisationViewModel, ISortingAlgorithm>(SelectedAlgorithm);
     }
 
     private async Task OnTestAlgorithm()

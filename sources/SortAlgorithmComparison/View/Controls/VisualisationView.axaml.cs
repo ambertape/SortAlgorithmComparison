@@ -8,29 +8,28 @@ using Waves.UI.Avalonia.Controls;
 using Waves.UI.Base.Attributes;
 using Waves.UI.Services.Interfaces;
 
-namespace SortAlgorithmComparison.View;
+namespace SortAlgorithmComparison.View.Controls;
 
 /// <summary>
 /// Test dialog.
 /// </summary>
-[WavesView(typeof(VisualisationViewModel))]
-public partial class VisualisationDialog : WavesDialog
+public partial class VisualisationView : WavesDialog
 {
     /// <summary>
-    /// Creates new instance os <see cref="VisualisationDialog"/>.
+    /// Creates new instance os <see cref="VisualisationView"/>.
     /// </summary>
-    public VisualisationDialog()
+    public VisualisationView()
     {
         InitializeComponent();
     }
 
     /// <summary>
-    /// Creates new instance of <see cref="VisualisationDialog"/>.
+    /// Creates new instance of <see cref="VisualisationView"/>.
     /// </summary>
     /// <param name="logger">Logger.</param>
     /// <param name="navigationService">Navigation service.</param>
-    public VisualisationDialog(
-        ILogger<VisualisationDialog> logger,
+    public VisualisationView(
+        ILogger<VisualisationView> logger,
         IWavesNavigationService navigationService)
         : base(logger, navigationService)
     {

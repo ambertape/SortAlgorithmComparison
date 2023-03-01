@@ -5,10 +5,7 @@ using Microsoft.Extensions.Logging;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using SortAlgorithmComparison.Algorithms.Interfaces;
-using SortAlgorithmComparison.Model;
 using SortAlgorithmComparison.Services;
-using SortAlgorithmComparison.Utils;
-using Waves.Core.Extensions;
 using Waves.UI.Base.Attributes;
 using Waves.UI.Charts.Drawing.Primitives;
 using Waves.UI.Charts.Drawing.Primitives.Data;
@@ -16,16 +13,15 @@ using Waves.UI.Charts.Series;
 using Waves.UI.Charts.Series.Enums;
 using Waves.UI.Charts.Series.Interfaces;
 using Waves.UI.Dialogs;
-using Waves.UI.Presentation;
 using Waves.UI.Services.Interfaces;
 
-namespace SortAlgorithmComparison.ViewModel;
+namespace SortAlgorithmComparison.ViewModel.Controls;
 
 /// <summary>
 /// Test dialog view model.
 /// </summary>
-[WavesViewModel(typeof(VisualisationDialogViewModel))]
-public class VisualisationDialogViewModel : WavesDialogViewModelBase<ISortingAlgorithm, bool>
+[WavesViewModel(typeof(VisualisationViewModel))]
+public class VisualisationViewModel : WavesDialogViewModelBase<ISortingAlgorithm, bool>
 {
     private const int N = 200;
     private readonly DataGeneratorService _dataGeneratorService;
@@ -41,9 +37,9 @@ public class VisualisationDialogViewModel : WavesDialogViewModelBase<ISortingAlg
     /// <param name="navigationService">Navigation service.</param>
     /// <param name="logger">Logger.</param>
     /// <param name="dataGeneratorService">Data generator service.</param>
-    public VisualisationDialogViewModel(
+    public VisualisationViewModel(
         IWavesNavigationService navigationService,
-        ILogger<VisualisationDialogViewModel> logger,
+        ILogger<VisualisationViewModel> logger,
         DataGeneratorService dataGeneratorService)
         : base(navigationService, logger)
     {
